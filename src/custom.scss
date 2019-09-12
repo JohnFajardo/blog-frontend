@@ -1,0 +1,39 @@
+$border-radius:               0 !default;
+$border-radius-lg:            0 !default;
+$border-radius-sm:            0 !default;
+$primary: #1abc9c !default;
+$body-bg: #F2F2F2;
+$card-border-width: 0;
+
+.card {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.header-image {
+    background-image:url("./images/background-.jpg");
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    height: 150px;
+}
+
+.blog-title {
+    color: #fff;
+    a {
+        color: #fff;
+        &:hover {
+            color:#fff;
+        }
+    }
+}
+
+.post-img {
+    margin-left: -1px;
+}
+// href="//fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,700"
+// Customizations need to happen BEFORE importing bootstrap SASS
+@import '~bootstrap/scss/bootstrap.scss';
+
+.main-content {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
