@@ -16,15 +16,15 @@ class StoryComponent extends React.Component {
                             </div>
                             <div className="col-md-9">
                                 <div className="card-block px-3">
-                                <h4 className="card-title mt-4"><Link to={`/stories/${this.props.story.id}`}>{this.props.story.title}</Link></h4>
-                                <p className="card-text">{this.props.story.body.substring(0, 225)}...</p>
+                                <h4 className="card-title mt-4"><Link id={this.props.story.id} to={`/stories/${this.props.story.id}`}>{this.props.story.title}</Link></h4>
+                                <p className="card-text">{this.props.story.body.substring(0, 110)}...</p>
                                 <p className="meta">
                                 <i className="ion-md-calendar"></i>&nbsp;{this.props.story.created_at}&nbsp;&nbsp;
                                     <i className="ion-md-person"></i>&nbsp;&nbsp;
                                     {this.props.story.user.name}&nbsp;&nbsp; 
                                     <i className="ion-md-chatboxes"></i> 25
                                     </p>
-                                <Link className="btn btn-primary float-right mr-3 mb-3" to={`/stories/${this.props.story.id}`}>Read more...</Link>
+                                <Link className="btn btn-primary float-right mr-3 mb-5" id={this.props.story.id}  to={`/stories/${this.props.story.id}`}>Read more...</Link>
                             </div>
                             </div>
                             </div>
