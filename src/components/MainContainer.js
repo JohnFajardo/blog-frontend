@@ -9,7 +9,7 @@ class MainContainer extends React.Component {
 
     componentDidMount(){
         fetch("http://localhost:3000/stories")
-        .then(response=> response.json())
+        .then(response => response.json())
         .then(stories => this.setState({stories}))
     }
 

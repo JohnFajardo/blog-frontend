@@ -1,24 +1,21 @@
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 
 
 class Edit extends React.Component {
 
-    constructor(){
-        super()
-        this.state = {
-            story: [],
-            body: '',
-            title: ''
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state = {
+        id: '',
+        title: '',
+        body: ''
     }
 
     componentDidMount(){
         const storyId = this.props.match.params.id;
         fetch(`http://localhost:3000/stories/${storyId}`)
         .then(response => response.json())
-        .then(story => this.setState({story}));
+        .then(story => this.setState({id: story.id, title: story.title, body: story.body}));
+        //.then(story => console.log(story));
     }
 
     handleTitleChange = (e) => {
@@ -29,23 +26,20 @@ class Edit extends React.Component {
         this.setState({ body: e.target.value });
       }
 
-    handleSubmit(event) {
+    handleSubmit = async event => {
         event.preventDefault();
-        const newTitle = this.state.title;
-        const newBody = this.state.body;
-        const theId = this.state.story.id
-        event.preventDefault();
-        fetch(`http://localhost:3000/stories/${theId}`,{
+        await fetch(`http://localhost:3000/stories/${this.state.id}`,{
             method: "PATCH",
             headers: {
                 'Content-Type': 'Application/json',
                 'Accept': 'Application/json'
             },
             body: JSON.stringify({
-                title: newTitle, 
-                body: newBody
+                title: this.state.title, 
+                body: this.state.body
             })
-        })
+        });
+        this.props.history.push(`/stories/${this.state.id}`)
     }
 
     render(){
@@ -55,8 +49,8 @@ class Edit extends React.Component {
                     <div className="card p-5">
                         <h1>Editing post</h1>
                         <form onSubmit={this.handleSubmit}>
-                            <input className={"form-control mb-3"} name="title" defaultValue={this.state.story.title} onChange={this.handleTitleChange} type="text"/>
-                            <textarea className={"form-control"} name="body" defaultValue={this.state.story.body} onChange={this.handleBodyChange} />
+                            <input className={"form-control mb-3"} name="title" value={this.state.title} onChange={this.handleTitleChange} type="text"/>
+                            <textarea className={"form-control"} name="body" value={this.state.body} onChange={this.handleBodyChange} />
                             <Link to={""} onClick={() => this.props.history.goBack()} className={"btn btn-danger mt-3"} type="submit">Cancel</Link>
                             <button className={"btn btn-primary mt-3 float-right"} type="submit">Save changes</button>
                         
